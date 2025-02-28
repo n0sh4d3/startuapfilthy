@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Utility Class for Smooth Transition */
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+/* Accent Border */
+.accent-border {
+  position: relative;
+  box-shadow: -4px -4px 0px black; /* Cleaner effect */
+}
+
+.accent-border:hover {
+  box-shadow: -6px -6px 0px black;
+}
+
+/* Diagonal Split Background */
+.diagonal-split {
+  position: relative;
+  overflow: hidden;
+}
+
+.diagonal-split::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background: rgba(0, 0, 0, 0.03);
+  transform: rotate(25deg);
+  z-index: -1;
+}
+
+/* Category Card */
+.category-card {
+  @apply smooth-transition;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+}
+
+.category-line {
+  width: 30px;
+  transition: width 0.3s ease;
+}
+
+.category-card:hover .category-line {
+  width: 100%;
+}
+
+/* Navigation Link Underline */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Product Item Hover Effect */
+.product-item {
+  @apply smooth-transition;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Shop Now Button */
+.shop-now-btn {
+  @apply smooth-transition;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shop-now-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: black;
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+
+.shop-now-btn:hover {
+  color: white;
+}
+
+.shop-now-btn:hover::after {
+  height: 100%;
+}
+
+/* Newsletter Input */
+.newsletter-input {
+  @apply smooth-transition;
+}
+
+.newsletter-input:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Mask Image */
+.mask-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.mask-image::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mask-image:hover::before {
+  opacity: 1;
+}
+
+.image-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.mask-image:hover .image-label {
+  transform: translateY(0);
+}
+
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produkt - Koszulka Cwelka | cwel</title>
+  <link rel="stylesheet" href="../src/output.css">
+</head>
+
+<body class="bg-white">
+
+  <!-- Navigation -->
+  <nav class="container mx-auto px-4 py-6">
+    <div class="flex justify-between items-center">
+      <div class="text-3xl font-bold tracking-wider">C<span class="text-xl tracking-normal">wel</span></div>
+      <div class="hidden md:flex space-x-10">
+        <a href="/frontend/public/index.html" class="nav-link font-medium">Home</a>
+        <a href="/frontend/public/shop.html" class="nav-link font-medium">Shop</a>
+        <a href="/frontend/public/about.html" class="nav-link font-medium">About</a>
+        <a href="/frontend/public/contact.html" class="nav-link font-medium">Contact</a>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="#" class="hidden md:block">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </a>
+        <a href="#" class="hidden md:block">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </a>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </a>
+        <button class="md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Detail Section -->
+  <section class="container mx-auto px-4 py-16 md:py-24">
+    <div class="flex flex-col md:flex-row gap-16">
+      
+      <!-- Left Side - Product Images -->
+      <div class="w-full md:w-1/2">
+        <!-- Main Image Display -->
+        <div class="relative mb-6">
+          <img id="main-image" src="/api/placeholder/600/800" alt="Koszulka Cwelka" class="w-full h-auto object-cover rounded-lg shadow-lg">
+        </div>
+        
+        <!-- Thumbnail Images for Scrolling -->
+        <div class="flex gap-4">
+          <img class="thumbnail w-1/3 h-auto object-cover rounded-lg shadow-md cursor-pointer" src="/api/placeholder/300/400" alt="Koszulka Side View">
+          <img class="thumbnail w-1/3 h-auto object-cover rounded-lg shadow-md cursor-pointer" src="/api/placeholder/300/400" alt="Koszulka Back View">
+          <img class="thumbnail w-1/3 h-auto object-cover rounded-lg shadow-md cursor-pointer" src="/api/placeholder/300/400" alt="Koszulka Details">
+        </div>
+      </div>
+
+      <!-- Right Side - Product Info -->
+      <div class="w-full md:w-1/2">
+        <h1 class="text-4xl md:text-5xl font-bold text-black mb-4">Koszulka Cwelka</h1>
+        <p class="text-lg text-gray-600 mb-6">Stylowa koszulka dla prawdziwego cwela. Idealna na każdą okazję, wygodna i modna!</p>
+
+        <!-- Rating -->
+        <div class="flex items-center mb-6">
+          <span class="text-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27l4.15 2.73-1.11-4.82L20 9.24l-4.91-.39L12 4.62 9.91 8.85 5 9.24l3.96 5.94-1.1 4.82z" />
+            </svg>
+          </span>
+          <span class="text-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27l4.15 2.73-1.11-4.82L20 9.24l-4.91-.39L12 4.62 9.91 8.85 5 9.24l3.96 5.94-1.1 4.82z" />
+            </svg>
+          </span>
+          <span class="text-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27l4.15 2.73-1.11-4.82L20 9.24l-4.91-.39L12 4.62 9.91 8.85 5 9.24l3.96 5.94-1.1 4.82z" />
+            </svg>
+          </span>
+          <span class="text-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27l4.15 2.73-1.11-4.82L20 9.24l-4.91-.39L12 4.62 9.91 8.85 5 9.24l3.96 5.94-1.1 4.82z" />
+            </svg>
+          </span>
+          <span class="text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27l4.15 2.73-1.11-4.82L20 9.24l-4.91-.39L12 4.62 9.91 8.85 5 9.24l3.96 5.94-1.1 4.82z" />
+            </svg>
+          </span>
+          <span class="ml-2 text-gray-600">4.5 (200 reviews)</span>
+        </div>
+
+        <!-- Price -->
+        <p class="text-2xl font-semibold text-black mb-6">149,99 PLN</p>
+
+        <!-- Color Selector -->
+        <div class="mb-8">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz kolor:</h3>
+          <div class="flex gap-4">
+            <div class="w-6 h-6 rounded-full bg-black cursor-pointer border-2 border-gray-300"></div>
+            <div class="w-6 h-6 rounded-full bg-gray-400 cursor-pointer border-2 border-gray-300"></div>
+            <div class="w-6 h-6 rounded-full bg-white cursor-pointer border-2 border-gray-300"></div>
+          </div>
+        </div>
+
+        <!-- Size Selector with Accordion -->
+        <div class="mb-8">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz rozmiar:</h3>
+          <select class="w-full border-2 border-gray-300 rounded-md px-4 py-2 mb-6">
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">Extra Large</option>
+          </select>
+          <button class="w-full text-sm text-gray-500 hover:text-gray-800 transition-colors">
+            <span class="font-semibold">Rozmiar Guide:</span> <span class="underline">Click here</span> to view size chart
+          </button>
+        </div>
+
+        <!-- Size Guide Accordion -->
+        <div class="bg-gray-50 rounded-md shadow-md p-4 mb-8">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Tabela rozmiarów</h3>
+          <p class="text-sm text-gray-600 mb-4">The following size chart should help you choose the perfect size for your item. If you're still unsure, feel free to contact us!</p>
+          <table class="min-w-full table-auto">
+            <thead>
+              <tr class="border-b">
+                <th class="py-2 text-left px-4">Size</th>
+                <th class="py-2 text-left px-4">Chest (cm)</th>
+                <th class="py-2 text-left px-4">Length (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b">
+                <td class="py-2 px-4">S</td>
+                <td class="py-2 px-4">90-96</td>
+                <td class="py-2 px-4">68</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">M</td>
+                <td class="py-2 px-4">97-102</td>
+                <td class="py-2 px-4">70</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">L</td>
+                <td class="py-2 px-4">103-108</td>
+                <td class="py-2 px-4">72</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">XL</td>
+                <td class="py-2 px-4">109-114</td>
+                <td class="py-2 px-4">74</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Add to Cart -->
+        <button class="w-full bg-black text-white py-3 font-medium rounded-md hover:bg-gray-700 focus:outline-none mb-4">
+          Dodaj do Koszyka
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div>
+          <h3 class="text-xl font-bold mb-4 tracking-wider">c<span class="text-lg tracking-normal">wel</span></h3>
+          <p class="text-gray-600 mb-6">ciuszki bo micheaszek nie chce pracowac (sigma)</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript for image scrolling
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const mainImage = document.getElementById('main-image');
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        mainImage.src = thumbnail.src;
+      });
+    });
+  </script>
+
+</body>
+
+</html>
