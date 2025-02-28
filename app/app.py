@@ -42,6 +42,11 @@ def contact():
 def shop():
     return render_template('shop.html', shop_items=shop_items)
 
+@app.route('/item')
+def shop():
+    return render_template('item.html', shop_items=shop_items)
+
+
 @app.route('/cart')
 def cart():
     cart_items = shop_items
