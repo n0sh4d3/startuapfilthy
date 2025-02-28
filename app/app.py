@@ -58,3 +58,6 @@ def cart():
             #     Dodaj do Koszyka
             #   </button>
             #   </form>
+
+if __name__ == "__main__":
+    app.run()
