@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="pl">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Cwel</title>
-  <link rel="stylesheet" href="../static/output.css">
-</head>
-
-<body class="bg-white">
-
-  <!-- Navigation -->
-  <nav class="container mx-auto px-4 py-6">
-    <div class="flex justify-between items-center">
-      <div class="text-3xl font-bold tracking-wider">C<span class="text-xl tracking-normal">wel</span></div>
-      <div class="hidden md:flex space-x-10">
-        <a href="/frontend/public/index.html" class="nav-link font-medium">Home</a>
-        <a href="/frontend/public/shop.html" class="nav-link font-medium">Shop</a>
-        <a href="/frontend/public/about.html" class="nav-link font-medium">About</a>
-        <a href="/frontend/public/contact.html" class="nav-link font-medium">Contact</a>
-      </div>
-    </div>
-  </nav>
-
+{%extends "base.html"%}
+  {%block title%}Register - cwel{%endblock%}
+   {%block content%}
   <!-- Register Section -->
   <section class="container mx-auto px-4 py-16 md:py-24">
     <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
@@ -54,23 +32,8 @@
       </form>
 
       <div class="mt-6 text-center">
-        <p class="text-sm text-gray-600">Already have an account? <a href="/frontend/public/login.html" class="text-blue-500">Login here</a></p>
+        <p class="text-sm text-gray-600">Already have an account? <a href="/login" class="text-blue-500">Login here</a></p>
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-50 py-12">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div>
-          <h3 class="text-xl font-bold mb-4 tracking-wider">c<span class="text-lg tracking-normal">wel</span></h3>
-          <p class="text-gray-600 mb-6">ciuszki bo micheaszek nie chce pracowac (sigma)</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-</body>
-
-</html>
+{%endblock%}

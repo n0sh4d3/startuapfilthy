@@ -58,11 +58,13 @@ def cart():
     return render_template('cart.html', cart_items=cart_items, total=total)
 
 
-            #   <form action="" method="post">
-            #   <button class="w-full bg-black text-white py-3 font-medium rounded-md hover:bg-gray-700 focus:outline-none">
-            #     Dodaj do Koszyka
-            #   </button>
-            #   </form>
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, port=42069)
