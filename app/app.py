@@ -1,5 +1,5 @@
 from flask import Flask, render_template, make_response, abort
-import items_db
+import app.items_db as items_db
 
 app = Flask(__name__)
 

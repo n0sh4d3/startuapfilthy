@@ -25,7 +25,7 @@ def get_shop_items() -> list[dict[str, any]]:
         {
             NAME: "zestaw goonera",
             DESCRIPTION: "zeby hojnie zyc trzeba hojnie wydac",
-            PRICE: "gratis", # robiac to licze sie z faktem ze kosz sie rozjebie ale to smiesznie
+            PRICE: 0.00, # robiac to licze sie z faktem ze kosz sie rozjebie ale to smiesznie
         },
         {
             NAME: "cyberszlug",
