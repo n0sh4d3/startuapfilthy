@@ -1,28 +1,30 @@
-{%extends "base.html"%}
-  {%block title%}Itemy - cwel{%endblock%}
+{% extends "base.html" %}
 
-   {%block content%}
-  <!-- Shop Section -->
-  <section class="container mx-auto px-4 py-16 md:py-24">
+{% block title %}Itemy - cwel{% endblock %}
+
+{% block content %}
+<!-- Shop Section -->
+<section class="container mx-auto px-4 py-16 md:py-24">
     <h1 class="text-4xl md:text-6xl font-bold text-center mb-16">Lorem Ipsum</h1>
 
     <!-- Product Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-      <!-- Product Item -->
-      {% for dict_item in shop_items%}
-          <div class="product-item bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
-            <img src="/api/placeholder/300/400" alt="Item 1" class="w-full h-64 object-cover">
-            <div class="p-6">
-                <a href="/frontend/public/item.html" class="text-xl font-semibold mb-4 block hover:underline">
-                    {{dict_item['name']}}
-                  </a>
-              <p class="text-gray-600 mb-4">{{dict_item['description']}}</p>
-              <p class="text-lg font-bold text-black mb-6">{{dict_item['price']}} PLN</p>
-            <!--form is here-->
+        <!-- Product Item -->
+        {% for dict_item in shop_items %}
+            <div class="product-item bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
+                <img src="/api/placeholder/300/400" alt="{{ dict_item['name'] }}" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <!-- Create dynamic link to each item's page -->
+                    <a href="/item/{{ dict_item['name']|lower }}" class="text-xl font-semibold mb-4 block hover:underline">
+                        {{ dict_item['name'] }}
+                    </a>
+                    <p class="text-gray-600 mb-4">{{ dict_item['description'] }}</p>
+                    <p class="text-lg font-bold text-black mb-6">{{ dict_item['price'] }} PLN</p>
+                    <!-- Form or other content goes here -->
+                </div>
             </div>
-          </div>
-      {%endfor%}
+        {% endfor %}
     </div>
-  </section>
+</section>
 
-{%endblock%}
+{% endblock %}

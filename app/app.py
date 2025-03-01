@@ -1,5 +1,4 @@
-from flask import Flask, render_template, make_response
-
+from flask import Flask, render_template, make_response, abort
 
 app = Flask(__name__)
 
@@ -10,24 +9,25 @@ SIZE = "size"
 
 shop_items = [
     {
-    NAME: "Item1",
-    DESCRIPTION: "Opis1",
-    PRICE: 10.99,
+        NAME: "spust pycha",
+        DESCRIPTION: "nie wiem co sie dzieje ale kurwa buja nie",
+        PRICE: 21.37,
     },
     {
-    NAME: "Item2",
-    DESCRIPTION: "Opis2",
-    PRICE: 20.99,
+        NAME: "brudna woda",
+        DESCRIPTION: "nazwa muwi sama za sb",
+        PRICE: 20.99,
     },
-      {
-    NAME: "Item2",
-    DESCRIPTION: "Opis2",
-    PRICE: 20.99,
+    {
+        NAME: "order cwela",
+        DESCRIPTION: "ciezko zapracowalem na ten tytul",
+        PRICE: 90.99,
     },
 ]
+
 @app.route('/')
 def home():
-    response = make_response("welcom")
+    response = make_response("Welcome")
     return render_template('index.html')
 
 @app.route('/about')
@@ -42,21 +42,29 @@ def contact():
 def shop():
     return render_template('shop.html', shop_items=shop_items)
 
-@app.route('/item')
-def item():
-    return render_template('item.html', shop_items=shop_items)
+@app.route('/item/<item_name>')
+def item(item_name):
+    
+    # modl sie ze nastepny item istnieje
+    item = next((item for item in shop_items if item[NAME].lower() == item_name.lower()), None)
 
+    if item is None:
+        print(f"Item not found: {item_name}")  # pytanie kurwa jak skoro jest. patrze sie na to kurwa
+        return render_template('error.html')
+
+    print(f"Item details: {item}")
+
+    return render_template('item.html', item=item)
 
 @app.route('/cart')
 def cart():
     cart_items = shop_items
     total = 0
-    for item_price in cart_items:
-        total += item_price[PRICE]
+    for item in cart_items:
+        total += item[PRICE]
 
     total = round(total, 2)
     return render_template('cart.html', cart_items=cart_items, total=total)
-
 
 @app.route('/login')
 def login():
