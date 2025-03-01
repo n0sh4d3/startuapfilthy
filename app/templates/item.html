@@ -3,11 +3,17 @@
 {% block title %}Product - {{ item['name'] }}{% endblock %}
 
 {% block content %}
-<section class="container mx-auto px-4 py-16 md:py-24">
+<section class="container mx-auto px-4 py-2 md:py-4">
   <div class="flex flex-col md:flex-row gap-16">
     <div class="w-full md:w-1/2">
       <div class="relative mb-6">
         <img id="main-image" src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['name'] }}" class="w-full h-96 object-cover rounded-2xl shadow-lg md:h-128 md:w-128">
+        {% if item['new'] %}
+          <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
+        {% endif %}
+        {% if item.discount %}
+          <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">przecumka</div>
+        {% endif %}
       </div>
 
       <div class="flex gap-4">
@@ -21,77 +27,101 @@
       <h1 class="text-4xl md:text-5xl font-bold text-black mb-4">{{ item['name'] }}</h1>
       <p class="text-lg text-gray-600 mb-6">{{ item['description'] }}</p>
 
-      <!-- Price -->
+      {% if item.discount %}
+      <p class="text-2xl font-semibold text-black mb-6">
+        <span class="line-through text-gray-500">{{ item['price'] }} PLN</span>
+        <span class="ml-2">{{ item['discount'] }} PLN</span>
+      </p>
+      {% else %}
       <p class="text-2xl font-semibold text-black mb-6">{{ item['price'] }} PLN</p>
+      {% endif %}
 
-      <!-- Color Selector -->
-      <div class="mb-8">
-        <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz kolor:</h3>
-        <div class="flex gap-4">
-          <div class="w-6 h-6 rounded-full bg-black cursor-pointer border-2 border-gray-300"></div>
-          <div class="w-6 h-6 rounded-full bg-gray-400 cursor-pointer border-2 border-gray-300"></div>
-          <div class="w-6 h-6 rounded-full bg-white cursor-pointer border-2 border-gray-300"></div>
+      <form action="{{ url_for('add_to_cart', item_name=item['name']) }}" method="POST">
+        <div class="mb-8">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz kolor:</h3>
+          <div class="flex gap-4">
+            <div class="flex items-center">
+              <input type="radio" id="color-black" name="color" value="NIgger" class="hidden peer" checked>
+              <label for="color-black" class="w-6 h-6 rounded-full bg-black cursor-pointer border-2 border-gray-300 peer-checked:border-blue-500"></label>
+            </div>
+            <div class="flex items-center">
+              <input type="radio" id="color-gray" name="color" value="Szary" class="hidden peer">
+              <label for="color-gray" class="w-6 h-6 rounded-full bg-gray-400 cursor-pointer border-2 border-gray-300 peer-checked:border-blue-500"></label>
+            </div>
+            <div class="flex items-center">
+              <input type="radio" id="color-white" name="color" value="Bialas2115" class="hidden peer">
+              <label for="color-white" class="w-6 h-6 rounded-full bg-white cursor-pointer border-2 border-gray-300 peer-checked:border-blue-500"></label>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-8">
-        <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz rozmiar:</h3>
-        <select class="w-full border-2 border-gray-300 rounded-md px-4 py-2 mb-6">
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-        </select>
-        <button class="w-full text-sm text-gray-500 hover:text-gray-800 transition-colors">
-          <span class="font-semibold">rozmiaruwka:</span> <span class="underline">link do lepszy widos</span>
+        <div class="mb-8">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Wybierz rozmiar:</h3>
+          <select name="size" class="w-full border-2 border-gray-300 rounded-md px-4 py-2 mb-6">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+          <button type="button" class="w-full text-sm text-gray-500 hover:text-gray-800 transition-colors" onclick="toggleSizeTable()">
+            <span class="font-semibold">rozmiaruwka:</span> <span class="underline">link do lepszy widos</span>
+          </button>
+        </div>
+
+        <div id="size-table" class="bg-gray-50 rounded-md shadow-md p-4 mb-8 overflow-hidden">
+          <h3 class="text-xl font-medium text-gray-700 mb-3">Tabela rozmiarów</h3>
+          <p class="text-sm text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+          <table class="min-w-full table-auto">
+            <thead>
+              <tr class="border-b">
+                <th class="py-2 text-left px-4">Rozmair</th>
+                <th class="py-2 text-left px-4">Klata (cm)</th>
+                <th class="py-2 text-left px-4">Dlugosc (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b">
+                <td class="py-2 px-4">S</td>
+                <td class="py-2 px-4">90-96</td>
+                <td class="py-2 px-4">68</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">M</td>
+                <td class="py-2 px-4">97-102</td>
+                <td class="py-2 px-4">70</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">L</td>
+                <td class="py-2 px-4">103-108</td>
+                <td class="py-2 px-4">72</td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 px-4">XL</td>
+                <td class="py-2 px-4">109-114</td>
+                <td class="py-2 px-4">74</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center mb-6">
+          <h3 class="text-xl font-medium text-gray-700 mr-4">Ilość:</h3>
+          <div class="flex items-center border-2 border-gray-300 rounded-md">
+            <button type="button" onclick="decrementQuantity()" class="px-4 py-2 text-xl focus:outline-none">-</button>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" class="w-12 text-center focus:outline-none">
+            <button type="button" onclick="incrementQuantity()" class="px-4 py-2 text-xl focus:outline-none">+</button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-black text-white py-3 font-medium rounded-md hover:bg-gray-700 focus:outline-none mb-4">
+          Dodaj do Koszyka
         </button>
-      </div>
-
-      <div class="bg-gray-50 rounded-md shadow-md p-4 mb-8">
-        <h3 class="text-xl font-medium text-gray-700 mb-3">Tabela rozmiarów</h3>
-        <p class="text-sm text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-        <table class="min-w-full table-auto">
-          <thead>
-            <tr class="border-b">
-              <th class="py-2 text-left px-4">Rozmair</th>
-              <th class="py-2 text-left px-4">Klata (cm)</th>
-              <th class="py-2 text-left px-4">Dlugosc (cm)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b">
-              <td class="py-2 px-4">S</td>
-              <td class="py-2 px-4">90-96</td>
-              <td class="py-2 px-4">68</td>
-            </tr>
-            <tr class="border-b">
-              <td class="py-2 px-4">M</td>
-              <td class="py-2 px-4">97-102</td>
-              <td class="py-2 px-4">70</td>
-            </tr>
-            <tr class="border-b">
-              <td class="py-2 px-4">L</td>
-              <td class="py-2 px-4">103-108</td>
-              <td class="py-2 px-4">72</td>
-            </tr>
-            <tr class="border-b">
-              <td class="py-2 px-4">XL</td>
-              <td class="py-2 px-4">109-114</td>
-              <td class="py-2 px-4">74</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <button class="w-full bg-black text-white py-3 font-medium rounded-md hover:bg-gray-700 focus:outline-none mb-4">
-        Dodaj do Koszyka
-      </button>
+      </form>
     </div>
   </div>
 </section>
 
 <script>
-  // JavaScript for image scrolling
   const thumbnails = document.querySelectorAll('.thumbnail');
   const mainImage = document.getElementById('main-image');
 
@@ -99,6 +129,53 @@
     thumbnail.addEventListener('click', () => {
       mainImage.src = thumbnail.src;
     });
+  });
+
+  function incrementQuantity() {
+    const input = document.getElementById('quantity');
+    const currentValue = parseInt(input.value, 10);
+    if (currentValue < 10) {
+      input.value = currentValue + 1;
+    }
+  }
+  
+  function decrementQuantity() {
+    const input = document.getElementById('quantity');
+    const currentValue = parseInt(input.value, 10);
+    if (currentValue > 1) {
+      input.value = currentValue - 1;
+    }
+  }
+
+  function toggleSizeTable() {
+    const sizeTable = document.getElementById('size-table');
+    
+    if (sizeTable.classList.contains('hidden')) {
+      // ale zara jebnie
+      sizeTable.classList.remove('hidden');
+      sizeTable.classList.add('max-h-0', 'opacity-0', 'overflow-hidden');
+      
+      void sizeTable.offsetWidth;
+      
+      // tu sie zaczyna
+      sizeTable.classList.add('transition-all', 'duration-700', 'ease-out');
+      sizeTable.classList.remove('max-h-0', 'opacity-0');
+      sizeTable.classList.add('max-h-96', 'opacity-100');
+    } else {
+      // tu konczy
+      sizeTable.classList.remove('max-h-96', 'opacity-100');
+      sizeTable.classList.add('max-h-0', 'opacity-0');
+      
+      setTimeout(() => {
+        sizeTable.classList.add('hidden');
+        sizeTable.classList.remove('transition-all', 'duration-300', 'ease-out', 'max-h-0', 'opacity-0', 'overflow-hidden');
+      }, 300);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const sizeTable = document.getElementById('size-table');
+    sizeTable.classList.add('hidden');
   });
 </script>
 
