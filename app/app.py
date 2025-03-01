@@ -36,7 +36,7 @@ shop_items = [
     {
         NAME: "chinska republika ludowa",
         DESCRIPTION: "Zǎoshang hǎo zhōngguó xiànzài wǒ yǒu BING CHILLING 🥶🍦 wǒ hěn xǐhuān BING CHILLING 🥶🍦",
-        PRICE: 4.50,
+        PRICE: 2.50,
     },
     {
         NAME: "samohud",
@@ -60,7 +60,6 @@ def contact():
 
 @app.route('/shop')
 def shop():
-    shop_items = shop_items
     return render_template('shop.html', shop_items=shop_items)
 
 @app.route('/item/<item_name>')
