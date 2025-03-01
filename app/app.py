@@ -232,6 +232,11 @@ def search():
     cart_count = get_cart_count()
     return render_template('search_results.html', results=results, query=query, cart_count=cart_count)
 
+@app.context_processor
+def inject_shop_items():
+    return dict(shop_items=shop_items)
+
+# kiedys to zrobie
 @app.route('/login')
 def login():
     cart_count = get_cart_count()

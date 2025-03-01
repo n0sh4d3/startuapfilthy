@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Kosz{% endblock %}
+{% block title %}Koszyk{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold mb-8">Koszyk</h1>
+  <h1 class="text-3xl font-bold mb-8">Twój koszyk</h1>
   
   {% if cart_items and cart_items|length > 0 %}
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
@@ -29,7 +29,7 @@
                   {% if item.discount %}
                   <div>
                     <span class="line-through text-gray-500">{{ item['price'] }} PLN</span>
-                    <span>{{ item['discount'] }} PLN</span>
+                    <span class="text-red-500 font-bold">{{ item['discount'] }} PLN</span>
                   </div>
                   {% else %}
                   <div>{{ item['price'] }} PLN</div>
@@ -47,19 +47,18 @@
                   {% set cart_key = item['name'].lower() + '_' + item['size'] + '_' + item['color'] %}
                   <input type="hidden" name="cart_key" value="{{ cart_key }}">
                   
-                  <button type="submit" name="action" value="decrease" class="px-2 py-1 border rounded-l focus:outline-none">-</button>
+                  <button type="submit" name="action" value="decrease" class="px-2 py-1 border rounded-l focus:outline-none transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105">-</button>
                   <span class="px-4 py-1 border-t border-b">{{ item['quantity'] }}</span>
-                  <button type="submit" name="action" value="increase" class="px-2 py-1 border rounded-r focus:outline-none">+</button>
+                  <button type="submit" name="action" value="increase" class="px-2 py-1 border rounded-r focus:outline-none transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105">+</button>
                 </form>
               </div>
-              <div class="w-1/5 text-right">{{ item['item_total'] }} PLN</div>
+              <div class="w-1/5 text-right font-bold">{{ item['item_total'] }} PLN</div>
             </div>
             <div class="flex justify-end mt-2">
               <form action="{{ url_for('update_cart_item') }}" method="POST">
-                {% set cart_key = item['name'].lower() + '_' + item['size'] + '_' + item['color'] %}
                 <input type="hidden" name="cart_key" value="{{ cart_key }}">
                 <input type="hidden" name="action" value="remove">
-                <button type="submit" class="text-red-500 text-sm">aborcja</button>
+                <button type="submit" class="text-red-500 text-sm hover:text-red-700 transition-colors duration-200 transform hover:scale-110 hover:underline hover:decoration-2 hover:decoration-red-500">Usuń produkt</button>
               </form>
             </div>
           </div>
@@ -67,19 +66,19 @@
           
           <div class="flex justify-between items-center py-4">
             <form action="{{ url_for('clear_cart') }}" method="POST">
-              <button type="submit" class="text-red-500 font-medium">jebac ten koszyk</button>
+              <button type="submit" class="text-red-500 font-medium hover:text-red-700 transition-colors duration-200 transform hover:scale-110 hover:underline hover:decoration-2 hover:decoration-red-500">Wyczyść koszyk</button>
             </form>
             <div class="text-right">
-              <div class="text-lg font-medium">Razem: {{ total }} PLN</div>
+              <div class="text-lg font-bold">Łączna kwota: {{ total }} PLN</div>
             </div>
           </div>
           
           <div class="flex justify-end mt-6">
-            <a href="/shop" class="inline-block bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium mr-4">
-              chce dac wincyj sos
+            <a href="/shop" class="inline-block bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium mr-4 transition-colors duration-200 ease-in-out hover:bg-gray-300 hover:scale-105  hover:decoration-2 hover:decoration-black">
+              Kontynuuj zakupy
             </a>
-            <button class="bg-black text-white px-6 py-3 rounded-md font-medium">
-              ODDAJE PIENIADZE NA RZECZ RASIZMU
+            <button class="bg-black text-white px-6 py-3 rounded-md font-medium transition-all duration-200 ease-in-out hover:bg-gray-700 hover:scale-105">
+              Przejdź do płatności
             </button>
           </div>
         </div>
@@ -90,10 +89,10 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
       </svg>
-      <h2 class="text-2xl font-bold mb-4">PUSTY KOSZ BIEDAKU</h2>
-      <p class="text-gray-600 mb-8">dziwko jebana oddawaj mi pieniadze</p>
-      <a href="/shop" class="bg-black text-white px-6 py-3 rounded-md font-medium">
-        type shit sir!
+      <h2 class="text-2xl font-bold mb-4">Twój koszyk jest pusty</h2>
+      <p class="text-gray-600 mb-8">Dodaj produkty do koszyka, aby kontynuować zakupy.</p>
+      <a href="/shop" class="bg-black text-white px-6 py-3 rounded-md font-medium transition-all duration-200 ease-in-out hover:bg-gray-700 hover:scale-105">
+        Przeglądaj sklep
       </a>
     </div>
   {% endif %}

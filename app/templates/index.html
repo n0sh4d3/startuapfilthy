@@ -1,16 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Home - cwel{% endblock %}
+{% block title %}Home - Sklep{% endblock %}
 
 {% block content %}
 <section class="container mx-auto px-4 py-12 md:py-24">
   <div class="flex flex-col md:flex-row items-center">
     <div class="w-full md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-10 relative">
       <div class="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-black"></div>
-      <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight tracking-tight pl-6 pt-6">Zwal mi <br /><span class="italic">KONIA</span></h1>
-      <p class="text-gray-600 mb-8 text-lg max-w-md">PIerdoli mnie kruwa.<br />ten cessesik jebany</p>
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight tracking-tight pl-6 pt-6">Top3 <br /><span class="italic">Cwele</span></h1>
+      <p class="text-gray-600 mb-8 text-lg max-w-md">
+        random yap session here.
+      </p>
       <a href="/shop">
         <button class="shop-now-btn text-black px-8 py-3 font-medium border-2 border-black rounded-none">
-          SPIERDALAJ sigmo
+          Zobacz itemki
         </button>
       </a>
     </div>
@@ -18,57 +20,47 @@
       <div class="relative overflow-hidden">
         <img src="{{ url_for('static', filename='images/' + featured_item['image']) }}" alt="{{ featured_item['name'] }}" class="w-full h-64 object-cover" />
         <div class="absolute bottom-0 right-0 bg-white p-4 text-sm">
-          <span class="text-xs ml-2">top1 kurwa kup</span>
+          <span class="text-xs ml-2">sprzedaje sie jak zloto</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Featured Products -->
 <section class="container mx-auto px-4 py-16 md:py-24">
   <div class="flex flex-col md:flex-row justify-between items-end mb-12">
     <div>
-      <h2 class="text-3xl font-bold mb-4">Kurwa Drippp</h2>
+      <h2 class="text-3xl font-bold mb-4">Nowe guwno</h2>
       <div class="h-px w-24 bg-black category-line"></div>
     </div>
-      <a href="/shop" class="view-all">
-        View All
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+    <a href="/shop" class="view-all flex items-center">
+      <span>Zobacz wszystko</span>
+    </a>
   </div>
-  
+   
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
     {% for item in featured_items %}
     <div class="product-item">
-        <a href="{{ url_for('item', item_name=item['name']|lower) }}" class="">
-      <div class="relative overflow-hidden mb-4 mask-image">
-        <!-- ale te kurwa obrazki sa zjebane                                                                to je zaogragla to rounded-->
-          <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="cwel1" class="w-full h-64 object-cover rounded-xl" />
-
-        
-        {% if item['new'] %}
-            <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
-        {% endif %}
-        
-        {% if item['discount'] %}
-            <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">przecumka</div>
-        {% endif %}
-        
-      </div>
-        </a>
+      <a href="{{ url_for('item', item_name=item['name']|lower) }}">
+        <div class="relative overflow-hidden mb-4 mask-image">
+          <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['name'] }}" class="w-full h-64 object-cover rounded-xl" />
+          
+          {% if item['new'] %}
+            <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowość</div>
+          {% endif %}
+          
+          {% if item['discount'] %}
+            <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">Promocja</div>
+          {% endif %}
+        </div>
+      </a>
       
-      <!-- item name -->
       <h3 class="text-lg font-semibold mb-1">
         <a href="{{ url_for('item', item_name=item['name']|lower) }}" class="text-black hover:underline">
           {{ item['name'] }}
         </a>
       </h3>
 
-      
-      <!-- Price and Discount -->
       {% if item['discount'] %}
         <p class="text-gray-600 mb-2"><span class="line-through mr-2">{{ item['price'] }} PLN</span>{{ item['discount'] }} PLN</p>
       {% else %}
@@ -76,13 +68,12 @@
       {% endif %}
     </div>
     {% endfor %}
-</div>
-
+  </div>
 </section>
 
-<!-- Instagram Feed -->
+<!-- Instagram -->
 <section class="container mx-auto px-4 py-12 mb-16">
-  <h2 class="text-3xl font-bold mb-4">@CWEL_STYLE</h2>
+  <h2 class="text-3xl font-bold mb-4">@grumpy_man_clth</h2>
   <div class="h-px w-24 bg-black mb-8 category-line"></div>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <div class="aspect-square overflow-hidden mask-image">
@@ -101,7 +92,7 @@
 </section>
 {% endblock %}
 
-{%block script%}
+{% block script %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const productContainer = document.querySelector('.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4.gap-8');
@@ -116,16 +107,16 @@
     carouselOuter.className = 'carousel-outer relative overflow-hidden w-full';
     const carouselInner = document.createElement('div');
     carouselInner.className = 'carousel-inner flex space-x-6';
-    carouselInner.style.width = '10000px'; // jak to sie zmieni to sie dziejom czary
+    carouselInner.style.width = '10000px';
     productContainer.parentNode.insertBefore(carouselOuter, productContainer);
     carouselOuter.appendChild(carouselInner);
     
     const viewportWidth = window.innerWidth;
     const setWidth = products.length * itemTotalWidth;
-    const totalSets = Math.ceil((viewportWidth * 3) / setWidth) + 1; // dodatkowy set na bufer
+    const totalSets = Math.ceil((viewportWidth * 3) / setWidth) + 1;
     
     for (let i = 0; i < totalSets; i++) {
-      products.forEach((product, index) => {
+      products.forEach((product) => {
         const clone = product.cloneNode(true);
         clone.classList.add('carousel-item', 'flex-shrink-0');
         clone.style.width = `${itemWidth}px`;
@@ -143,22 +134,19 @@
     let resumeTimeout = null;
     let isPaused = false;
     let lastTimestamp = 0;
-    let currentSetIndex = 0;
+
     function scroll(timestamp) {
       if (!lastTimestamp) lastTimestamp = timestamp;
       const elapsed = timestamp - lastTimestamp;
       
-      // sproboj kurwa tego dotknac tylko
       if (elapsed > 16) { 
         scrollPos -= scrollSpeed;
         lastTimestamp = timestamp;
         
         if (Math.abs(scrollPos) >= setWidth) {
           scrollPos += setWidth;
-          currentSetIndex = (currentSetIndex + 1) % totalSets;
         }
         
-        // musi byc kurwa 3d akceleracja sprzetowa bo inaczej nie zadziala
         carouselInner.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
       }
       
@@ -185,7 +173,7 @@
         if (!isPaused) {
           startScrolling();
         }
-      }, 500); // dilej w ms do kontynowania
+      }, 500);
       isPaused = false;
     }
     
@@ -202,4 +190,4 @@
     startScrolling();
   });
 </script>
-{%endblock%}
+{% endblock %}

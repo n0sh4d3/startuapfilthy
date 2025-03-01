@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}sigma znalazl{% endblock %}
+{% block title %}Wyniki wyszukiwania{% endblock %}
 
 {% block content %}
 <section class="container mx-auto px-4 py-8 md:py-12">
-    <h1 class="text-4xl md:text-6xl font-bold text-center mb-6">wyniki kurwa szukanai</h1>
-    <p class="text-center text-xl mb-12">znalazlem sb {{ results|length }} dla zapytania"{{ query }}"</p>
+    <h1 class="text-4xl md:text-6xl font-bold text-center mb-6">Wyniki wyszukiwania</h1>
+    <p class="text-center text-xl mb-12">Znaleziono {{ results|length }} wyników dla zapytania "{{ query }}"</p>
     
     {% if results %}
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
@@ -15,10 +15,10 @@
                     <div class="relative">
                         <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['name'] }}" class="w-full h-64 object-cover rounded-2xl">
                         {% if item['new'] %}
-                            <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
+                            <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowość</div>
                         {% endif %}
                         {% if item['discount'] %}
-                            <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">przecumka</div>
+                            <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">Promocja</div>
                         {% endif %}
                     </div>
                     
@@ -39,9 +39,9 @@
     </div>
     {% else %}
     <div class="text-center py-16">
-        <h2 class="text-2xl font-semibold mb-4">sory nic nie znalazlem</h2>
-        <p class="text-gray-600 mb-8">we wpisz co istnieje kurwa co</p>
-        <a href="/shop" class="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition-colors">TYPE SHIT SIR!</a>
+        <h2 class="text-2xl font-semibold mb-4">Brak wyników</h2>
+        <p class="text-gray-600 mb-8">Spróbuj ponownie, wpisując inne zapytanie.</p>
+        <a href="/shop" class="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition-colors">Przeglądaj sklep</a>
     </div>
     {% endif %}
 </section>

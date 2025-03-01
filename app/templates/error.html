@@ -1,14 +1,16 @@
-  {% extends "base.html"%}
-  {%block title%}brawo cwelu{%endblock%}
-   {%block content%}
-  <section class="container mx-auto px-4 py-12 md:py-24 text-center">
-    <h1 class="text-6xl font-bold text-red-600 mb-4">{{ status_code}}</h1>
-    <h2 class="text-3xl font-bold mb-4">brawo kurwa</h2>
-    <p class="text-gray-600 mb-8 text-lg">pierdol sie</p>
-    <a href="/">
-      <button class="bg-black text-white px-8 py-3 font-medium rounded-none">
-      sory sigma juz bede grzeczny :3
-      </button>
-    </a>
-  </section>
-  {%endblock%}
+{% extends "base.html" %}
+
+{% block title %}Błąd {{ status_code }}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-4 py-12 md:py-24 text-center">
+  <h1 class="text-6xl font-bold text-red-600 mb-4">{{ status_code }}</h1>
+  <h2 class="text-3xl font-bold mb-4">Ups! Coś poszło nie tak</h2>
+  <p class="text-gray-600 mb-8 text-lg">Wystąpił błąd. Spróbuj ponownie lub wróć na stronę główną.</p>
+  <a href="/">
+    <button class="bg-black text-white px-8 py-3 font-medium rounded-none">
+      Wróć na stronę główną
+    </button>
+  </a>
+</section>
+{% endblock %}
