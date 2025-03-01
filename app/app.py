@@ -94,5 +94,14 @@ def login():
 def register():
     return render_template('register.html')
 
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('error.html', status_code=404)
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('error.html', status_code=500)
+
 if __name__ == "__main__":
     app.run(debug=True, port=42069)
