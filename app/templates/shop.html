@@ -1,30 +1,36 @@
 {% extends "base.html" %}
-
 {% block title %}Itemy - cwel{% endblock %}
-
 {% block content %}
-<!-- Shop Section -->
 <section class="container mx-auto px-4 py-16 md:py-24">
     <h1 class="text-4xl md:text-6xl font-bold text-center mb-16">Lorem Ipsum</h1>
-
-    <!-- Product Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-        <!-- Product Item -->
-        {% for dict_item in shop_items %}
+        {% for item in shop_items %}
             <div class="product-item bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
-                <img src="/api/placeholder/300/400" alt="{{ dict_item['name'] }}" class="w-full h-64 object-cover">
+                <div class="relative">
+                    <!-- CIEZKA WODA!!!!!  tu sa te cwele na gurze obrazkuw -->
+                    <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['name'] }}" class="w-full h-64 object-cover rounded-2xl">
+                    {% if item['new'] %}
+                        <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
+                    {% endif %}
+                    {% if item['discount'] %}
+                        <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">przecumka</div>
+                    {% endif %}
+                </div>
+                
                 <div class="p-6">
-                    <!-- Create dynamic link to each item's page -->
-                    <a href="/item/{{ dict_item['name']|lower }}" class="text-xl font-semibold mb-4 block hover:underline">
-                        {{ dict_item['name'] }}
+                    <!-- p o w i e s z e  s i e -->
+                    <a href="/item/{{ item['name']|lower }}" class="text-xl font-semibold mb-4 block hover:underline">
+                        {{ item['name'] }}
                     </a>
-                    <p class="text-gray-600 mb-4">{{ dict_item['description'] }}</p>
-                    <p class="text-lg font-bold text-black mb-6">{{ dict_item['price'] }} PLN</p>
-                    <!-- Form or other content goes here -->
+                    <p class="text-gray-600 mb-4">{{ item['description'] }}</p>
+                    {% if item['discount'] %}
+                    <p class="text-lg font-bold text-black mb-6"><span class="line-through mr-2">{{ item['price'] }} PLN</span>{{ item['discount'] }} PLN</p>
+                    {% else %}
+                    <p class="text-lg font-bold text-black mb-6">{{ item['price'] }} PLN</p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
     </div>
 </section>
-
 {% endblock %}

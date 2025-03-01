@@ -1,115 +1,99 @@
-{%extends "base.html"%}
-  {%block title%}Home- cwel{%endblock%}
-   {%block content%}
-  <!-- Hero Section -->
-  <section class="container mx-auto px-4 py-12 md:py-24">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="w-full md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-10 relative">
-        <div class="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-black"></div>
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight tracking-tight pl-6 pt-6">Zwal mi <br /><span class="italic">KONIA</span></h1>
-        <p class="text-gray-600 mb-8 text-lg max-w-md">PIerdoli mnie kruwa.<br />ten cessesik jebany</p>
-        <a href="/shop">
+{% extends "base.html" %}
+{% block title %}Home - cwel{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-4 py-12 md:py-24">
+  <div class="flex flex-col md:flex-row items-center">
+    <div class="w-full md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-10 relative">
+      <div class="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-black"></div>
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight tracking-tight pl-6 pt-6">Zwal mi <br /><span class="italic">KONIA</span></h1>
+      <p class="text-gray-600 mb-8 text-lg max-w-md">PIerdoli mnie kruwa.<br />ten cessesik jebany</p>
+      <a href="/shop">
         <button class="shop-now-btn text-black px-8 py-3 font-medium border-2 border-black rounded-none">
           SPIERDALAJ sigmo
         </button>
-        </a>
-      </div>
-      <div class="w-full md:w-1/2">
-        <div class="relative overflow-hidden">
-          <img src="/api/placeholder/600/800" alt="img here kurwa" class="w-full object-cover" />
-          <div class="absolute bottom-0 right-0 bg-white p-4 text-sm">
-            <span class="text-xs ml-2">top1 kurwa kup</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Products -->
-  <section class="container mx-auto px-4 py-16 md:py-24">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-      <div>
-        <h2 class="text-3xl font-bold mb-4">Kurwa Drippp</h2>
-        <div class="h-px w-24 bg-black category-line"></div>
-      </div>
-      <a href="/frontend/public/shop.html" class="text-black font-medium flex items-center mt-4 md:mt-0">
-        View All
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
       </a>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="product-item">
-        <div class="relative overflow-hidden mb-4 mask-image">
-          <img src="/api/placeholder/300/400" alt="cwel1" class="w-full" />
-          <div class="absolute top-4 right-4 bg-white text-black text-xs py-1 px-3 font-medium">NEW</div>
+    <div class="w-full md:w-1/2">
+      <div class="relative overflow-hidden">
+        <img src="{{ url_for('static', filename='images/' + featured_item['image']) }}" alt="{{ featured_item['name'] }}" class="w-full h-64 object-cover" />
+        <div class="absolute bottom-0 right-0 bg-white p-4 text-sm">
+          <span class="text-xs ml-2">top1 kurwa kup</span>
         </div>
-        <h3 class="text-lg font-semibold mb-1">Metalowe Dildo</h3>
-        <p class="text-gray-600 mb-2">$89</p>
-      </div>
-      <div class="product-item">
-        <div class="relative overflow-hidden mb-4 mask-image">
-          <img src="/api/placeholder/300/400" alt="cwel2" class="w-full" />
-        </div>
-        <h3 class="text-lg font-semibold mb-1">Pas Czterech Cweli</h3>
-        <p class="text-gray-600 mb-2">$110</p>
-      </div>
-      <div class="product-item">
-        <div class="relative overflow-hidden mb-4 mask-image">
-          <img src="/api/placeholder/300/400" alt="cwel3" class="w-full" />
-          <div class="absolute top-4 right-4 bg-black text-white text-xs py-1 px-3 font-medium">O KURWA TANIO!!</div>
-        </div>
-        <h3 class="text-lg font-semibold mb-1">Eutanazja</h3>
-        <p class="text-gray-600 mb-2"><span class="line-through mr-2">$145</span>$99</p>
-      </div>
-      <div class="product-item">
-        <div class="relative overflow-hidden mb-4 mask-image">
-          <img src="/api/placeholder/300/400" alt="cwel4" class="w-full" />
-        </div>
-        <h3 class="text-lg font-semibold mb-1">Kipsta Drip</h3>
-        <p class="text-gray-600 mb-2">$179</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Newsletter -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-4">
-      <div class="max-w-3xl mx-auto relative">
-        <div class="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-black"></div>
-        <div class="absolute bottom-0 right-0 w-24 h-24 border-b-4 border-r-4 border-black"></div>
-        <div class="text-center p-12">
-          <h2 class="text-3xl font-bold mb-4">Zostan Cwelem</h2>
-          <p class="text-gray-600 mb-8 max-w-md mx-auto">Oddaj mi swój mejlik a czasem dostaniesz kuponik czy coś.</p>
-          <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-            <input type="email" placeholder="Your email address" class="newsletter-input flex-grow px-4 py-3 border-b-2 border-gray-200 focus:outline-none focus:border-black bg-transparent" />
-            <button type="submit" class="shop-now-btn bg-transparent text-black px-6 py-3 font-medium border-2 border-black whitespace-nowrap">
-              I'M IN KURWO
-            </button>
-          </form>
-        </div>
-      </div>
+<!-- Featured Products -->
+<section class="container mx-auto px-4 py-16 md:py-24">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+    <div>
+      <h2 class="text-3xl font-bold mb-4">Kurwa Drippp</h2>
+      <div class="h-px w-24 bg-black category-line"></div>
     </div>
-  </section>
+    <a href="/shop" class="text-black font-medium flex items-center mt-4 md:mt-0">
+      View All
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    {% for item in featured_items %}
+    <div class="product-item">
+      <div class="relative overflow-hidden mb-4 mask-image">
+        <!-- ale te kurwa obrazki sa zjebane                                                                to je zaogragla to rounded-->
+        <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="cwel1" class="w-full h-64 object-cover rounded-xl" />
+        
+        {% if item['new'] %}
+            <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
+        {% endif %}
+        
+        {% if item['discount'] %}
+            <div class="absolute top-4 right-4 rounded-md bg-black text-white text-xs py-1 px-3 font-medium">przecumka</div>
+        {% endif %}
+        
+      </div>
+      
+      <!-- item name -->
+      <h3 class="text-lg font-semibold mb-1">
+        <a href="{{ url_for('item', item_name=item['name']|lower) }}" class="text-black hover:underline">
+          {{ item['name'] }}
+        </a>
+      </h3>
 
-  <!-- Instagram Feed -->
-  <section class="container mx-auto px-4 py-12 mb-16">
-    <h2 class="text-3xl font-bold mb-4">@CWEL_STYLE</h2>
-    <div class="h-px w-24 bg-black mb-8 category-line"></div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="aspect-square overflow-hidden mask-image">
-        <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
-      </div>
-      <div class="aspect-square overflow-hidden mask-image">
-        <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
-      </div>
-      <div class="aspect-square overflow-hidden mask-image">
-        <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
-      </div>
-      <div class="aspect-square overflow-hidden mask-image">
-        <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
-      </div>
+      
+      <!-- Price and Discount -->
+      {% if item['discount'] %}
+        <p class="text-gray-600 mb-2"><span class="line-through mr-2">{{ item['price'] }} PLN</span>{{ item['discount'] }} PLN</p>
+      {% else %}
+        <p class="text-gray-600 mb-2">{{ item['price'] }} PLN</p>
+      {% endif %}
     </div>
-  </section>
-{%endblock%}
+    {% endfor %}
+</div>
+
+</section>
+
+<!-- Instagram Feed -->
+<section class="container mx-auto px-4 py-12 mb-16">
+  <h2 class="text-3xl font-bold mb-4">@CWEL_STYLE</h2>
+  <div class="h-px w-24 bg-black mb-8 category-line"></div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="aspect-square overflow-hidden mask-image">
+      <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
+    </div>
+    <div class="aspect-square overflow-hidden mask-image">
+      <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
+    </div>
+    <div class="aspect-square overflow-hidden mask-image">
+      <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
+    </div>
+    <div class="aspect-square overflow-hidden mask-image">
+      <img src="/api/placeholder/300/300" alt="Instagram post" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+{% endblock %}
