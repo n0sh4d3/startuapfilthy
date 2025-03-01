@@ -1,4 +1,5 @@
 # napraw kurwa te obrazki w item.html bo wygladaja jak cwel
+# napraw te strzalke przy view all
 from flask import Flask, render_template, make_response, abort
 
 app = Flask(__name__)

@@ -32,20 +32,22 @@
       <h2 class="text-3xl font-bold mb-4">Kurwa Drippp</h2>
       <div class="h-px w-24 bg-black category-line"></div>
     </div>
-    <a href="/shop" class="text-black font-medium flex items-center mt-4 md:mt-0">
-      View All
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-      </svg>
-    </a>
+      <a href="/shop" class="view-all">
+        View All
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
   </div>
   
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
     {% for item in featured_items %}
     <div class="product-item">
+        <a href="{{ url_for('item', item_name=item['name']|lower) }}" class="">
       <div class="relative overflow-hidden mb-4 mask-image">
         <!-- ale te kurwa obrazki sa zjebane                                                                to je zaogragla to rounded-->
-        <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="cwel1" class="w-full h-64 object-cover rounded-xl" />
+          <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="cwel1" class="w-full h-64 object-cover rounded-xl" />
+
         
         {% if item['new'] %}
             <div class="absolute top-4 left-4 rounded-md bg-white text-black text-xs py-1 px-3 font-medium shadow-lg">Nowe</div>
@@ -56,6 +58,7 @@
         {% endif %}
         
       </div>
+        </a>
       
       <!-- item name -->
       <h3 class="text-lg font-semibold mb-1">
@@ -97,3 +100,106 @@
   </div>
 </section>
 {% endblock %}
+
+{%block script%}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productContainer = document.querySelector('.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4.gap-8');
+    const products = Array.from(productContainer.querySelectorAll('.product-item'));
+    
+    if (products.length === 0) return;
+    
+    const itemWidth = 280; 
+    const itemMargin = 24; 
+    const itemTotalWidth = itemWidth + itemMargin; 
+    const carouselOuter = document.createElement('div');
+    carouselOuter.className = 'carousel-outer relative overflow-hidden w-full';
+    const carouselInner = document.createElement('div');
+    carouselInner.className = 'carousel-inner flex space-x-6';
+    carouselInner.style.width = '10000px'; // jak to sie zmieni to sie dziejom czary
+    productContainer.parentNode.insertBefore(carouselOuter, productContainer);
+    carouselOuter.appendChild(carouselInner);
+    
+    const viewportWidth = window.innerWidth;
+    const setWidth = products.length * itemTotalWidth;
+    const totalSets = Math.ceil((viewportWidth * 3) / setWidth) + 1; // dodatkowy set na bufer
+    
+    for (let i = 0; i < totalSets; i++) {
+      products.forEach((product, index) => {
+        const clone = product.cloneNode(true);
+        clone.classList.add('carousel-item', 'flex-shrink-0');
+        clone.style.width = `${itemWidth}px`;
+        clone.addEventListener('mouseenter', pauseScrolling);
+        clone.addEventListener('mouseleave', scheduleResumeScrolling);
+        
+        carouselInner.appendChild(clone);
+      });
+    }
+    
+    productContainer.remove();
+    let scrollPos = 0;
+    const scrollSpeed = 0.7;
+    let scrollId = null;
+    let resumeTimeout = null;
+    let isPaused = false;
+    let lastTimestamp = 0;
+    let currentSetIndex = 0;
+    function scroll(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const elapsed = timestamp - lastTimestamp;
+      
+      // sproboj kurwa tego dotknac tylko
+      if (elapsed > 16) { 
+        scrollPos -= scrollSpeed;
+        lastTimestamp = timestamp;
+        
+        if (Math.abs(scrollPos) >= setWidth) {
+          scrollPos += setWidth;
+          currentSetIndex = (currentSetIndex + 1) % totalSets;
+        }
+        
+        // musi byc kurwa 3d akceleracja sprzetowa bo inaczej nie zadziala
+        carouselInner.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+      }
+      
+      scrollId = requestAnimationFrame(scroll);
+    }
+    
+    function pauseScrolling() {
+      isPaused = true;
+      if (scrollId) {
+        cancelAnimationFrame(scrollId);
+        scrollId = null;
+      }
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+        resumeTimeout = null;
+      }
+    }
+    
+    function scheduleResumeScrolling() {
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+      }
+      resumeTimeout = setTimeout(() => {
+        if (!isPaused) {
+          startScrolling();
+        }
+      }, 500); // dilej w ms do kontynowania
+      isPaused = false;
+    }
+    
+    function startScrolling() {
+      if (!scrollId) {
+        lastTimestamp = 0;
+        scrollId = requestAnimationFrame(scroll);
+      }
+    }
+    
+    carouselOuter.addEventListener('mouseenter', pauseScrolling);
+    carouselOuter.addEventListener('mouseleave', scheduleResumeScrolling);
+    
+    startScrolling();
+  });
+</script>
+{%endblock%}

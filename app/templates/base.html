@@ -11,7 +11,14 @@
 <body class="bg-white">
   <nav class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center">
-      <div class="text-3xl font-bold tracking-wider">C<span class="text-xl tracking-normal">wel</span></div>
+
+      <a href="/" style="text-decoration: none;">
+        <div class="logo-container">
+          <span class="logo-letter">C</span>
+          <span class="logo-text">wel</span>
+        </div>
+      </a>
+
       <div class="hidden md:flex space-x-10">
         <a href="/" class="nav-link font-medium">Home</a>
         <a href="/shop" class="nav-link font-medium">Shop</a>
@@ -65,4 +72,27 @@
   </footer>
 
 </body>
+{% block script %}
+{%endblock %}
+<script>
+  // a to tylko zeby kurwa c wel sie ladnie pokazywal
+  document.querySelector('.logo-container').addEventListener('click', function(e) {
+    e.preventDefault();
+    this.style.animation = 'none';
+    this.offsetHeight; 
+    this.style.animation = null;
+    const logoLetter = this.querySelector('.logo-letter');
+    const logoText = this.querySelector('.logo-text');
+    logoLetter.style.animation = 'none';
+    logoText.style.animation = 'none';
+    logoLetter.offsetHeight; 
+    logoText.offsetHeight; 
+    logoLetter.style.animation = null;
+    logoText.style.animation = null;
+    this.classList.remove('animated');
+    void this.offsetWidth;
+    this.classList.add('animated');
+
+  });
+</script>
 </html>

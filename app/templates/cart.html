@@ -14,7 +14,7 @@
         {% for item in cart_items%}
         <div class="flex justify-between items-center py-4 border-b">
           <div class="flex items-center gap-4">
-            <img src="/api/placeholder/200/200" alt="Product Image" class="w-20 h-20 object-cover rounded-md">
+            <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="Product Image" class="w-20 h-20 object-cover rounded-md">
             <div>
               <h3 class="text-lg font-medium text-gray-800">{{item['name']}}</h3>
               <p class="text-sm text-gray-500">Rozmiar: {{item['size']}}</p>
